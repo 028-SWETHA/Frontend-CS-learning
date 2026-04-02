@@ -1,12 +1,11 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";   // ✅ FIXED
 import "./TheoryPage.css";
 import "./TopicDashboard.css";
 
 function TheoryPage() {
   const [answers, setAnswers] = useState({});
   const [submitted, setSubmitted] = useState(false);
-  const navigate = useNavigate();   // ✅ FIXED
+  
 
   const questions = [
     {
