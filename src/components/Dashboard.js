@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Chart as ChartJS,
@@ -25,10 +25,15 @@ function Dashboard() {
   const user = JSON.parse(localStorage.getItem("user"));
   const currentUser = localStorage.getItem("currentUser");
 
-  // 🔒 Protect route
-  if (!currentUser) {
-    navigate("/");
-  }
+  // ✅ FIX: Safe navigation using useEffect
+  useEffect(() => {
+    if (!currentUser) {
+      navigate("/");
+    }
+  }, [currentUser, navigate]);
+
+  // 🛑 Prevent blank crash
+  if (!currentUser) return null;
 
   // 📊 FETCH RESULTS
   const theoryResults =
@@ -72,7 +77,6 @@ function Dashboard() {
     else algoSkill = "AVERAGE";
   }
 
-  // ✅ OS SKILL
   let osSkill = null;
   if (OsTheoryScore !== undefined && OsVideoScore !== undefined) {
     if (OsVideoScore > OsTheoryScore) osSkill = "HIGH";
@@ -148,7 +152,6 @@ function Dashboard() {
     navigate("/");
   };
 
-  // ✅ SWITCH USER FIX
   const handleSwitchUser = () => {
     localStorage.removeItem("currentUser");
     navigate("/");
@@ -174,29 +177,19 @@ function Dashboard() {
         <h3>Explore Topics</h3>
 
         <ul>
-          <li
-            onClick={handleDataStructuresClick}
-            style={{ cursor: "pointer", color: "blue" }}
-          >
+          <li onClick={handleDataStructuresClick} style={{ cursor: "pointer", color: "blue" }}>
             Data Structures — Arrays & Linked Lists
           </li>
 
-          <li
-            onClick={handleAlgorithmsClick}
-            style={{ cursor: "pointer", color: "blue" }}
-          >
+          <li onClick={handleAlgorithmsClick} style={{ cursor: "pointer", color: "blue" }}>
             Algorithms — Sorting & Searching
           </li>
 
-          <li
-            onClick={handleOsClick}
-            style={{ cursor: "pointer", color: "blue" }}
-          >
+          <li onClick={handleOsClick} style={{ cursor: "pointer", color: "blue" }}>
             Operating System — CPU Scheduling
           </li>
         </ul>
 
-        {/* 📊 ANALYTICS */}
         {(theoryScore !== undefined ||
           videoScore !== undefined ||
           algoTheoryScore !== undefined ||
@@ -206,13 +199,10 @@ function Dashboard() {
           <div className="quiz-performance">
             <h3>📊 Learning Analytics</h3>
 
-            {/* CARDS */}
             <div className="score-box">
               <div className="score-card">
                 <h4>🧠 Concentration</h4>
-                <p>
-                  {concentration !== null ? `${concentration}%` : "N/A"}
-                </p>
+                <p>{concentration !== null ? `${concentration}%` : "N/A"}</p>
               </div>
 
               <div className="score-card">
@@ -221,7 +211,6 @@ function Dashboard() {
               </div>
             </div>
 
-            {/* SKILLS */}
             {videoSkill && (
               <p className="quiz-result">
                 {videoSkill === "HIGH"
@@ -244,55 +233,30 @@ function Dashboard() {
               </p>
             )}
 
-            {/* 📊 CHART */}
             <div className="chart-box">
               <h4>Quiz Score Comparison</h4>
 
-              <div
-                style={{
-                  width: "400px",
-                  height: "250px",
-                  margin: "20px auto",
-                  background: "#fff",
-                  padding: "10px",
-                  borderRadius: "10px",
-                  boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-                }}
-              >
+              <div style={{
+                width: "400px",
+                height: "250px",
+                margin: "20px auto",
+                background: "#fff",
+                padding: "10px",
+                borderRadius: "10px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.1)"
+              }}>
                 <Bar data={barData} options={barOptions} />
               </div>
             </div>
           </div>
         )}
 
-        {/* BUTTONS */}
         <div style={{ marginTop: "20px" }}>
-          <button
-            onClick={handleLogout}
-            style={{
-              padding: "8px 15px",
-              borderRadius: "8px",
-              backgroundColor: "#f87171",
-              color: "white",
-              border: "none",
-              cursor: "pointer",
-              marginRight: "10px",
-            }}
-          >
+          <button onClick={handleLogout} style={{ marginRight: "10px" }}>
             Logout
           </button>
 
-          <button
-            onClick={handleSwitchUser}
-            style={{
-              padding: "8px 15px",
-              borderRadius: "8px",
-              backgroundColor: "#3b82f6",
-              color: "white",
-              border: "none",
-              cursor: "pointer",
-            }}
-          >
+          <button onClick={handleSwitchUser}>
             Switch User
           </button>
         </div>
