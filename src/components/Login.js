@@ -31,8 +31,7 @@ function Login() {
         localStorage.setItem("user", JSON.stringify(data.user));
         localStorage.setItem("currentUser", data.user.rollNumber);
 
-        navigate("/dashboard");
-      } else {
+        window.location.href = "/dashboard";         } else {
         alert(data.message || "Login failed!");
       }
     } catch (err) {

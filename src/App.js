@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 
 import Login from "./components/Login";
@@ -9,7 +9,7 @@ import TopicDashboard from "./components/TopicDashboard";
 import TheoryPage from "./components/TheoryPage";
 import VideoPage from "./components/VideoPage";
 
-import AlgorithmDashboard from "./components/AlgorithmDashboard"; // ✅ FIX
+import AlgorithmDashboard from "./components/AlgorithmDashboard";
 import AlgoTheory from "./components/AlgoTheory";
 import AlgoVideo from "./components/AlgoVideo";
 
@@ -17,9 +17,14 @@ import OsDashboard from "./components/OsDashboard";
 import OsTheory from "./components/OsTheory";
 import OsVideo from "./components/OsVideo";
 
-
 function App() {
-  const user = JSON.parse(localStorage.getItem("user"));
+  const [user, setUser] = useState(null);
+
+  // ✅ Sync with localStorage
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem("user"));
+    setUser(storedUser);
+  }, []);
 
   return (
     <Router>
@@ -59,11 +64,12 @@ function App() {
           path="/algorithms/video"
           element={user ? <AlgoVideo /> : <Navigate to="/" />}
         />
+
+        {/* OS */}
         <Route
           path="/Os"
           element={user ? <OsDashboard /> : <Navigate to="/" />}
         />
-        
         <Route
           path="/Os/video"
           element={user ? <OsVideo /> : <Navigate to="/" />}
