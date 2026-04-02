@@ -1,0 +1,132 @@
+/* Background */
+.theory-wrapper {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 30px 15px;
+  background: linear-gradient(135deg, #1e1b4b, #312e81);
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Glass Card */
+.theory-box {
+  width: 100%;
+  max-width: 800px;
+  padding: 30px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  color: #f8fafc;
+  animation: slideUp 0.8s ease;
+}
+
+/* Headings */
+.theory-box h2 {
+  text-align: center;
+  color: #217d49;
+  margin-bottom: 20px;
+}
+
+.theory-box h3 {
+  margin-top: 15px;
+  color: #e0e7ff;
+}
+
+/* Lists */
+.theory-box ul {
+  padding-left: 20px;
+}
+
+/* Quiz Card */
+.question-box {
+  background: rgba(255, 255, 255, 0.12);
+  padding: 18px;
+  border-radius: 14px;
+  margin-bottom: 16px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.question-box:hover {
+  transform: scale(1.02);
+  background: rgba(255, 255, 255, 0.2);
+}
+.option {
+  display: grid;
+  grid-template-columns: 0.5fr auto;   /* text left | dot right */
+  align-items: center;               /* vertical lock */
+  width: 100%;
+  padding: 14px 18px;
+  margin: 10px 0;
+  border-radius: 15px;
+  background: rgba(255, 255, 255, 0.15);
+  cursor: pointer;
+}
+
+/* Text */
+.option-text {
+  font-size: 15px;
+  color: #f8fafc;
+  line-height: 1;
+}
+
+/* Radio button */
+.option input[type="radio"] {
+  margin: 0;                         /* remove browser margin */
+  width: 12px;
+  height: 10px;
+  accent-color: #c7d2fe;
+}
+
+
+
+/* Button */
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background: linear-gradient(90deg, #a4a4aa, #dadadd);
+  color: white;
+  border: none;
+  border-radius: 14px;
+  font-size: 17px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(99, 102, 241, 0.5);
+}
+
+/* Score */
+.score {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 18px;
+  color: #22c55e;
+  animation: pop 0.5s ease;
+}
+
+/* Animations */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pop {
+  0% { transform: scale(0.8); }
+  100% { transform: scale(1); }
+}

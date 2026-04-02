@@ -1,0 +1,35 @@
+.topic-dashboard {
+  background: #f8faff;
+  min-height: 100vh;
+  padding: 30px;
+  font-family: "Poppins", sans-serif;
+}
+
+.topic-dashboard h2 {
+  color: #4a00e0;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.section-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: white;
+  border-radius: 10px;
+  padding: 20px;
+  width: 260px;
+  text-align: center;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  background: #e8deff;
+}
