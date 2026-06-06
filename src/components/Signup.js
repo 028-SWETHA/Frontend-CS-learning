@@ -42,7 +42,7 @@ function Signup() {
 
       if (response.ok) {
         alert("✅ Signup successful! Please login.");
-        navigate("/login"); // React navigation
+        navigate("/"); // React navigation
       } else {
         alert(data.message || "Signup failed!");
       }
