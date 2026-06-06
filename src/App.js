@@ -18,8 +18,9 @@ import OsTheory from "./components/OsTheory";
 import OsVideo from "./components/OsVideo";
 
 function App() {
-  const [user, setUser] = useState(null);
-
+const [user, setUser] = useState(() => {
+  return JSON.parse(localStorage.getItem("user"));
+});
   // ✅ Sync with localStorage
   useEffect(() => {
     const storedUser = JSON.parse(localStorage.getItem("user"));
